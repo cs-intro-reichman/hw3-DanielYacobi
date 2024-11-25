@@ -18,7 +18,7 @@ public class LoanCalc {
 		double payment = 10000;
 		double endBalance = endBalance(loan, rate, n, payment);
 		System.out.println("If your periodical payment is " + payment + ", your ending balance is: " + (int) endBalance);
-		
+		/* 
 		// Computes the periodical payment using brute force search
 		System.out.print("\nPeriodical payment, using brute force: ");
 		System.out.println((int) bruteForceSolver(loan, rate, n, epsilon));
@@ -27,14 +27,18 @@ public class LoanCalc {
 		// Computes the periodical payment using bisection search
 		System.out.print("\nPeriodical payment, using bi-section search: ");
 		System.out.println((int) bisectionSolver(loan, rate, n, epsilon));
-		System.out.println("number of iterations: " + iterationCounter);
+		System.out.println("number of iterations: " + iterationCounter); */
 	}
 
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
-		// Replace the following statement with your code
-		return 0;
+		double balance = loan;
+		double fixedRate = 1 + (rate * 0.01); //changes the display of rate
+		for (int i = 0; i < n; i++) {
+			balance = (balance - payment) * fixedRate; //does this function n times
+		}
+		return Math.round(balance); //rounds the final balance
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
