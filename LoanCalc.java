@@ -50,13 +50,9 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	iterationCounter = 0;
-		if (n == 0) {
-			System.out.println("enter different n"); //cant divide by 0
-			return loan;
-		}
 		double g = loan / n; //initail guess
 		double fixedPayment = endBalance(loan, rate, n, g);
-		while (Math.abs(fixedPayment) > epsilon) { //continues until fixedPayment is 0
+		while (fixedPayment > epsilon) { //continues until fixedPayment is 0
 			if (fixedPayment > 0)
 				g = g + epsilon; //adds epsilon to our guess
 			else
