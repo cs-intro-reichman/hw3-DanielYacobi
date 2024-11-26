@@ -65,6 +65,8 @@ public class Anagram {
 				pro = pro + str.charAt(i); //ASCII range of lowercase letters or numbers
 			if (str.charAt(i) >= 65 && str.charAt(i) <= 90) //ASCII range of uppercase letters
 				pro = pro + ((char)(str.charAt(i) + 32)); //converts to lowercase
+			if (str.charAt(i) == ' ');
+				pro = pro + str.charAt(i);//preserves spaces
 		}
 		return pro;
 	} 

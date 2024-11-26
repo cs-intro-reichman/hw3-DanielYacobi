@@ -15,10 +15,12 @@ public class LoanCalc {
 		System.out.println("Loan = " + loan + ", interest rate = " + rate + "%, periods = " + n);
 
 		// Computes the ending balance of the loan, given a periodical payment
+		/* 
 		double payment = 10000;
 		double endBalance = endBalance(loan, rate, n, payment);
-		//System.out.println("If your periodical payment is " + payment + ", your ending balance is: " + (int) endBalance);
-	
+		System.out.println("If your periodical payment is " + payment + ", your ending balance is: " + (int) endBalance);
+		*/
+
 		// Computes the periodical payment using brute force search
 		System.out.print("\nPeriodical payment, using brute force: ");
 		System.out.println((int) bruteForceSolver(loan, rate, n, epsilon));
@@ -49,16 +51,16 @@ public class LoanCalc {
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	iterationCounter = 0;
 		if (n == 0) {
-			System.out.println("enter different n");
+			System.out.println("enter different n"); //cant divide by 0
 			return loan;
 		}
-		double g = loan / n;
+		double g = loan / n; //initail guess
 		double fixedPayment = endBalance(loan, rate, n, g);
-		while (Math.abs(fixedPayment) >= epsilon) {
+		while (Math.abs(fixedPayment) > epsilon) { //continues until fixedPayment is 0
 			if (fixedPayment > 0)
-				g = g + epsilon;
+				g = g + epsilon; //adds epsilon to our guess
 			else
-				g = g - epsilon;
+				g = g - epsilon; //subtracts epsilon to our guess
 			fixedPayment = endBalance(loan, rate, n, g);
 			iterationCounter ++;
 		}
@@ -72,19 +74,19 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
         iterationCounter = 0;
-		double H = loan;
-		if (n == 0) {
+		double H = loan; //high limit
+		if (n == 0) { //cant divide by 0
 			System.out.println("enter different n");
 			return loan;
 		}
-		double L = loan / n;
-		double g = (L + H) / 2;
+		double L = loan / n; //low limit
+		double g = (L + H) / 2; //initial guess
 		double fixedPayment = endBalance(loan, rate, n, g);
-		while (Math.abs(H - L) > epsilon) {
+		while (Math.abs(H - L) > epsilon) { 
 			if (fixedPayment * endBalance(loan, rate, n, L) > 0)
-				L = g;
+				L = g; //adjusts L
 			else
-				H = g;
+				H = g; //adjusts H
 			iterationCounter ++;
 			g = (L + H) / 2;
 			fixedPayment = endBalance(loan, rate, n, g);
