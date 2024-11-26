@@ -40,7 +40,7 @@ public class LoanCalc {
 		for (int i = 0; i < n; i++) {
 			balance = (balance - payment) * fixedRate; //does this function n times
 		}
-		return Math.round(balance); //rounds the final balance
+		return balance; //rounds the final balance
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
