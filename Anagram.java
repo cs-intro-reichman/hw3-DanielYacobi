@@ -30,6 +30,8 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		String s1 = preProcess(str1); //preprocessed version of str1
 		String s2 = preProcess(str2); //preprocessed version of str2
+		s1 = noSpaces(s1);
+		s2 = noSpaces(s2);
 		int l1 = s1.length();
 		int l2 = s2.length();
 		if (l1 != l2) //anagrams have the same length
@@ -65,14 +67,29 @@ public class Anagram {
 				pro = pro + str.charAt(i); //ASCII range of lowercase letters or numbers
 			if (str.charAt(i) >= 65 && str.charAt(i) <= 90) //ASCII range of uppercase letters
 				pro = pro + ((char)(str.charAt(i) + 32)); //converts to lowercase	
+			if (str.charAt(i) == ' ')
+				pro = pro + str.charAt(i); //preserves spaces
 		}
 		return pro;
 	} 
+
+	// Returns a preprocessed version of the given string and deletes all spaces
+	// git tests wouldn't run properly otherwise
+	public static String noSpaces(String str) {
+		int l = str.length();
+		String pro = "";
+		for (int i = 0; i < l; i++) {
+			if (str.charAt(i) != ' ')
+				pro = pro + str.charAt(i);
+		}
+		return pro;
+	}
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String s = preProcess(str); //preprocessed version of str
+		s = noSpaces(s);
 		String rando = "";
 		String temp = "";
 		int num; //will be a random number
